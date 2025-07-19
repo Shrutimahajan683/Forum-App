@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../../utils/auth.tsx';
-import '../styles/auth.css';
+import './auth.css';
 
 export default function SignUp() {
   const navigate = useNavigate();

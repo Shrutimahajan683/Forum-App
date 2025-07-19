@@ -61,7 +61,6 @@ export default function Feed() {
       attachments.map(fileToBase64)
     );
     const user: User = JSON.parse(localStorage.getItem('user'));
-    console.log({ user });
 
     const newPost: PostData = {
       id: Date.now(),

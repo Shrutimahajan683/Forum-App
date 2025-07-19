@@ -1,0 +1,38 @@
+.post-card{
+    background-color: rgb(201, 196, 196);
+}
+.post-body {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  
+  .emoji {
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    border-radius: 100%;
+    padding: 2px;
+  }
+  
+  .post-content {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    flex: 1;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
+    background-color: white;
+  }
+  .author-image{
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 10px;
+  }
+  .post-header{
+    display: flex;
+    gap: 10px;
+  }
+  .author-info{
+    display: flex;
+    flex-direction: column;
+  }

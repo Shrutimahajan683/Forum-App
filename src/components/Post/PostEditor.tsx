@@ -5,13 +5,16 @@ import 'react-rte/lib/RichTextEditor.css';
 import EmojiPicker from 'emoji-picker-react';
 import PostIcon from '../../assets/icons/post_icon.svg'
 import AttachFileIcon from '../../assets/icons/attachfile_icon.svg'
+import RecorderIcon from '../../assets/icons/recorder_icon.svg'
+import VedioCamIcon from '../../assets/icons/vediocam_icon.svg'
 import { TOOLBAR_CONFIG } from '../../utils/constants.tsx';
+import { notImplemeted } from '../../utils/actions.tsx';
 
-const PostEditor = ({ onPublish }: { onPublish: (content: string, attachments: File[], emoji: string) => void }) => {
+const postEditorActionsIcons = [AttachFileIcon, RecorderIcon, VedioCamIcon];
+const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string) => void }) => {
   const [value, setValue] = useState<EditorValue>(
     RichTextEditor.createEmptyValue()
   );
-  const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
   const [emoji, setEmoji] = useState('😊');
@@ -23,8 +26,8 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, attachments: F
   };
 
   const handlePublish = () => {
-    const postContent = value.toString('html').replace(/^<p>|<\/p>$/g, '');
-    onPublish(postContent, attachments, emoji);
+    const postContent = value.toString('html');
+    onPublish(postContent, emoji);
   }
 
   const onChange = (newValue: EditorValue) => {
@@ -90,32 +93,10 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, attachments: F
       </div>
       <div className="editor-footer-actions">
         <div className="action-bar">
-          <img src={AttachFileIcon} alt="Attach File Icon" className="post-icon" onClick={() => fileInputRef.current?.click()} title="Attach file" />
-          <input
-            type="file"
-            multiple
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            hidden
-          />
-          <input
-            type="file"
-            accept="video/*"
-            ref={videoInputRef}
-            onChange={handleFileChange}
-            hidden
-          />
+          {postEditorActionsIcons.map((actionIcon, index) => <img src={actionIcon} alt="actions icon" className="post-icon" onClick={notImplemeted} />)}
         </div>
         <img src={PostIcon} alt="Post Icon" className="post-icon" onClick={handlePublish} />
       </div>
-
-      {attachments.length > 0 && (
-        <div className="attachment-preview">
-          {attachments.map((file, index) => (
-            <span key={index} className="file-chip">{file.name}</span>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

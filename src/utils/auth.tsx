@@ -3,7 +3,7 @@ export type User = {
   email: string;
   password: string;
   name: string;
-  imgUrl: string;
+  imgUrl?: string;
 }
 export const users: User[] = [
   { email: 'demo@example.com', password: 'password123', name: "Theresa Webb", imgUrl: "https://www.gstatic.com/webp/gallery/2.webp", id: "demo#123" },
@@ -19,11 +19,17 @@ export function login(email: string, password: string): boolean {
   return false;
 }
 
-export function register(email: string, password: string): boolean {
+export function register(email: string, password: string, name: string): boolean {
   const exists = users.some(u => u.email === email);
   if (exists) return false;
-  users.push({ email, password });
-  localStorage.setItem('user', JSON.stringify({ email, password }));
+  users.push({
+    id: `${Date.now()}`,
+    email,
+    password,
+    name,
+    imgUrl: "https://www.gstatic.com/webp/gallery/4.jpg"
+  });
+  localStorage.setItem('user', JSON.stringify({ email, password, name }));
   return true;
 }
 

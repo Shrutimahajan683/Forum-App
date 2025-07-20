@@ -19,8 +19,7 @@ interface PostData {
   content: string;
   emoji: string;
   timestamp: string;
-  attachments: Base64Attachment[];
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 
@@ -50,12 +49,8 @@ export default function Feed() {
 
   const handlePublish = async (
     content: string,
-    attachments: File[],
     emoji: string
   ) => {
-    const base64Attachments = await Promise.all(
-      attachments.map(fileToBase64)
-    );
     const user: User = JSON.parse(localStorage.getItem('user'));
 
     const newPost: PostData = {
@@ -65,7 +60,6 @@ export default function Feed() {
       content,
       emoji,
       timestamp: new Date().toISOString(),
-      attachments: base64Attachments,
     };
 
     const updatedPosts = [newPost, ...posts];
@@ -75,19 +69,21 @@ export default function Feed() {
 
 
   return (
-    <div className="feed-container" onClick={() => {
-      if (!isAuthenticated()) {
-        setShowModal(true);
-      }
-    }}>
+    <div className="forum-container">
       <Header />
-      <PostEditor onPublish={handlePublish} />
-      <div className="posts-list">
-        {posts.map((p) => (
-          <PostCard key={p.id} {...p} />
-        ))}
+      <div className="feed-container" onClick={() => {
+        if (!isAuthenticated()) {
+          setShowModal(true);
+        }
+      }}>
+        <PostEditor onPublish={handlePublish} />
+        <div className="posts-list">
+          {posts.map((p) => (
+            <PostCard key={p.id} {...p} />
+          ))}
+        </div>
+        {showModal && <AuthModal onClose={() => setShowModal(false)} />}
       </div>
-      {showModal && <AuthModal onClose={() => setShowModal(false)} />}
     </div>
   );
 }

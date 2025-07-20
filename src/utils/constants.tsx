@@ -17,7 +17,8 @@ export const TOOLBAR_CONFIG = {
     { label: 'Heading Small', style: 'header-three' }
   ],
   BLOCK_TYPE_BUTTONS: [
-    { label: '', style: 'code-block', className: 'code-button' }
+    { label: '', style: 'code-block', className: 'code-button' },
+    { label: '"', style: 'blockquote' },
   ]
 };
 
@@ -33,3 +34,5 @@ export const AUTH_CONSTANTS = {
 }
 
 export const APP_TITLE = "foo-rum";
+
+export const DEFAULT_PROFILE_IMAGE_URL = "https://www.gstatic.com/webp/gallery/4.jpg";

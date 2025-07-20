@@ -1,5 +1,10 @@
+.card-container{
+  background-color: rgb(214, 210, 210);
+  padding: 5px;
+  border-radius: 10px;
+}
 .post-card{
-    background-color: rgb(201, 196, 196);
+    background-color: white
 }
 .post-body {
     flex-wrap: nowrap;
@@ -18,10 +23,11 @@
     display: grid;
     grid-template-columns: auto 1fr;
     flex: 1;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    white-space: pre-wrap;
     background-color: white;
+  }
+  .content{
+    display: flex;
+    flex-wrap: wrap;
   }
   .author-image{
     max-width: 50px;
@@ -35,4 +41,13 @@
   .author-info{
     display: flex;
     flex-direction: column;
+  }
+  .post-actions{
+    display: flex;
+    gap: 20px;
+    padding: 5px
+  }
+  .post-action-icon{
+    width: 20px;
+    height: 20px;
   }

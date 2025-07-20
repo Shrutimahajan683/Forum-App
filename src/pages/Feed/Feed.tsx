@@ -53,10 +53,6 @@ export default function Feed() {
     attachments: File[],
     emoji: string
   ) => {
-    if (!isAuthenticated()) {
-      setShowModal(true);
-      return;
-    }
     const base64Attachments = await Promise.all(
       attachments.map(fileToBase64)
     );
@@ -79,7 +75,11 @@ export default function Feed() {
 
 
   return (
-    <div className="feed-container">
+    <div className="feed-container" onClick={() => {
+      if (!isAuthenticated()) {
+        setShowModal(true);
+      }
+    }}>
       <Header />
       <PostEditor onPublish={handlePublish} />
       <div className="posts-list">

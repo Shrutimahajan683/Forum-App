@@ -56,7 +56,7 @@
     margin-right: 8px;
     position: absolute;
     top: 60px; 
-    left: 12px;
+    left: 10px;
     z-index: 10;
   }
   
@@ -120,14 +120,6 @@
     cursor: pointer;
     filter: invert(40%) sepia(100%) saturate(300%) hue-rotate(200deg);
   }
-  .ButtonGroup__root___3lEAn {
-    display: flex;
-    align-items: center;
-  }
-.EditorToolbar__root___3_Aqz{
-  display: flex;
-  align-items: center;
-}
 
 .content blockquote {
   border-left: 4px solid #ccc;
@@ -154,4 +146,6 @@
   font-family: monospace;
 }
   
-  
+.content p {
+  margin: 10px;
+}

@@ -18,6 +18,7 @@ interface Props {
 
 const postActionIcons = [PostHeartIcon, PostCommentIcon, PostShareIcon];
 export default function PostCard({ author, text, emoji, content, imageUrl, timestamp }: Props) {
+  console.log(author, content, imageUrl);
   return (
     <div className="card-container">
       <div className="post-card">

@@ -31,26 +31,20 @@ export default function Feed() {
   // Load posts from localStorage
   useEffect(() => {
     const storedPosts = localStorage.getItem('posts');
+    console.log(JSON.parse(storedPosts));
     if (storedPosts) {
       setPosts(JSON.parse(storedPosts));
     }
   }, []);
 
-  const fileToBase64 = (file: File): Promise<{ name: string; type: string; data: string }> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () =>
-        resolve({ name: file.name, type: file.type, data: reader.result as string });
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
-
-
+  console.log({ posts });
   const handlePublish = async (
     content: string,
     emoji: string
   ) => {
+    if (!isAuthenticated()) {
+      return
+    }
     const user: User = JSON.parse(localStorage.getItem('user'));
 
     const newPost: PostData = {
@@ -61,10 +55,9 @@ export default function Feed() {
       emoji,
       timestamp: new Date().toISOString(),
     };
-
     const updatedPosts = [newPost, ...posts];
     setPosts(updatedPosts);
-    addPost(updatedPosts);
+    addPost(newPost);
   };
 
 
@@ -82,7 +75,7 @@ export default function Feed() {
             <PostCard key={p.id} {...p} />
           ))}
         </div>
-        {showModal && <AuthModal onClose={() => setShowModal(false)} />}
+        {showModal && <AuthModal onSubmit={() => setShowModal(false)} />}
       </div>
     </div>
   );

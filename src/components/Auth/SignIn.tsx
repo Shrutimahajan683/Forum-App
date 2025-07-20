@@ -5,7 +5,7 @@ import './auth.css';
 import SignInIcon from '../../assets/icons/signin_icon.svg'
 import { AUTH_CONSTANTS } from '../../utils/constants.tsx';
 
-export default function SignIn() {
+export default function SignIn({ onSubmit }: { onSubmit?: () => void }) {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,6 +13,10 @@ export default function SignIn() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (onSubmit) {
+      onSubmit();
+      window.location.reload();
+    }
     if (login(email, password)) {
       navigate('/');
     } else {

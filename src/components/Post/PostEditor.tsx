@@ -11,13 +11,14 @@ import { TOOLBAR_CONFIG } from '../../utils/constants.tsx';
 import { notImplemeted } from '../../utils/actions.tsx';
 
 const postEditorActionsIcons = [AttachFileIcon, RecorderIcon, VedioCamIcon];
+const defaultEmoji = '😊';
 const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string) => void }) => {
   const [value, setValue] = useState<EditorValue>(
     RichTextEditor.createEmptyValue()
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
-  const [emoji, setEmoji] = useState('😊');
+  const [emoji, setEmoji] = useState(defaultEmoji);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const onEmojiClick = (emojiData) => {
@@ -27,6 +28,8 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string)
 
   const handlePublish = () => {
     const postContent = value.toString('html');
+    setValue(RichTextEditor.createEmptyValue());
+    setEmoji(defaultEmoji);
     onPublish(postContent, emoji);
   }
 
@@ -34,36 +37,6 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string)
     setValue(newValue);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const MAX_FILE_SIZE_MB = 5;
-    const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
-
-    if (e.target.files) {
-      const files: File[] = Array.from(e.target.files);
-      const validFiles: File[] = [];
-
-      files.forEach((file: File) => {
-        const isPNG = file.type === 'image/png';
-        const isSizeOK = file.size <= MAX_FILE_SIZE_BYTES;
-
-        if (!isPNG) {
-          alert(`${file.name} is not a PNG file.`);
-          return;
-        }
-
-        if (!isSizeOK) {
-          alert(`${file.name} exceeds the ${MAX_FILE_SIZE_MB}MB limit.`);
-          return;
-        }
-
-        validFiles.push(file);
-      });
-
-      if (validFiles.length > 0) {
-        setAttachments((prev) => [...prev, ...validFiles]);
-      }
-    }
-  };
 
 
   return (

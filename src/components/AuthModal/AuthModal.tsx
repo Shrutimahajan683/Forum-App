@@ -3,11 +3,11 @@ import './modal.css';
 import SignIn from '../Auth/SignIn.tsx'
 import ReactDOM from 'react-dom';
 
-export default function AuthModal({ onClose }: { onClose: () => void }) {
+export default function AuthModal({ onSubmit }: { onSubmit: () => void }) {
   return (
     ReactDOM.createPortal(< div className="modal-overlay" >
       <div className="modal">
-        <SignIn />
+        <SignIn onSubmit={onSubmit} />
       </div>
     </div >, document.getElementById('root'))
   );

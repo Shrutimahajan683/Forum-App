@@ -28,6 +28,8 @@
   .content{
     display: flex;
     flex-wrap: wrap;
+    overflow-wrap: break-word;
+    word-break: break-all;
   }
   .author-image{
     max-width: 50px;

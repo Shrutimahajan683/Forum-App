@@ -28,6 +28,7 @@ export const usePostHandler = () => {
 
   const savePosts = useCallback((posts: PostData[]) => {
     try {
+      console.log({ posts });
       localStorage.setItem('posts', JSON.stringify(posts));
     } catch (err) {
       console.error('Error saving posts to localStorage:', err);

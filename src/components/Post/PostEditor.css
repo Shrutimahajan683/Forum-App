@@ -149,3 +149,6 @@
 .content p {
   margin: 10px;
 }
+.empty-post-error{
+  color: red;
+}

@@ -16,6 +16,7 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string)
   const [value, setValue] = useState<EditorValue>(
     RichTextEditor.createEmptyValue()
   );
+  const [error, setError] = useState(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoInputRef = useRef<HTMLInputElement>(null);
   const [emoji, setEmoji] = useState(defaultEmoji);
@@ -28,12 +29,20 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string)
 
   const handlePublish = () => {
     const postContent = value.toString('html');
+    const isEmpty = postContent === '' || postContent === '<p><br></p>';
+    if (isEmpty) {
+      setError("Please put content before publishing post");
+      return;
+    }
     setValue(RichTextEditor.createEmptyValue());
     setEmoji(defaultEmoji);
     onPublish(postContent, emoji);
   }
 
   const onChange = (newValue: EditorValue) => {
+    if (error) {
+      setError(null);
+    }
     setValue(newValue);
   };
 
@@ -70,6 +79,7 @@ const PostEditor = ({ onPublish }: { onPublish: (content: string, emoji: string)
         </div>
         <img src={PostIcon} alt="Post Icon" className="post-icon" onClick={handlePublish} />
       </div>
+      {error && <span className="empty-post-error">{error}</span>}
     </div>
   );
 };

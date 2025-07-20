@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated, logout } from '../../utils/auth.tsx';
 import './header.css';
 import { APP_TITLE } from '../../utils/constants.tsx';
+import ToggleIcon from '../../assets/icons/toggle_icon.svg'
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function Header() {
   return (
     <header className="app-header">
       <div className="logo-container" onClick={() => navigate('/')}>
-        <div className="logo-circle"></div>
+        <img src={ToggleIcon} alt="toggle-icon" className="logo-icon" />
         <span className="logo-text">{APP_TITLE}</span>
       </div>
 

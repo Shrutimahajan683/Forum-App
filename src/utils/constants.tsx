@@ -12,7 +12,6 @@ export const TOOLBAR_CONFIG = {
   ],
   BLOCK_TYPE_DROPDOWN: [
     { label: 'Paragraph', style: 'unstyled' },
-    { label: 'Normal', style: 'unstyled' },
     { label: 'Heading Large', style: 'header-one' },
     { label: 'Heading Medium', style: 'header-two' },
     { label: 'Heading Small', style: 'header-three' }
@@ -27,7 +26,10 @@ export const AUTH_CONSTANTS = {
   signInLabel: "Sign In",
   signUpLabel: "Sign Up",
   signInButtonLabel: "Sign In",
-  signOutButtonLabel: "Log Out"
+  signOutButtonLabel: "Log Out",
+  signInToContinueLable: "Sign in to continue",
+  SignInToAccessAllFeaturesAppLable: "Sign in to access all the features on this app",
+  DoNotHaveAccountLable: "Do not have an account?"
 }
 
 export const APP_TITLE = "foo-rum";
